@@ -49,6 +49,7 @@ Este proyecto fue diseñado priorizando el rendimiento y la escalabilidad, utili
 ```
 👨‍💻 Autor
 Desarrollado por Nelson Avello
-[Veelo por ti mismo en](https://resumen-io.nelsonavello.dev)
+
+[Ver Aquí](https://resumen-io.nelsonavello.dev)
 
 AveLogic Chile
