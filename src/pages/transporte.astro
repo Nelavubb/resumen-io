@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MatrizTransporteInteractiva from '../components/MatrizTransporteInteractiva.astro';
+---
+
+<Layout title="Modelo de Transporte | IO">
+  <div class="space-y-12">
+    
+    <header class="border-b border-slate-800 pb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <a href="/" class="text-slate-500 hover:text-cyan-400 transition-colors flex items-center gap-1 text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          Volver al Dashboard
+        </a>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-xl font-bold">
+          01
+        </div>
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Modelo de Transporte</h1>
+          <p class="text-blue-400 font-mono text-sm mt-1">Programación Lineal aplicada a Redes</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+      <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span>
+        Teoría y Concepto
+      </h2>
+      <p class="text-slate-400 font-light leading-relaxed mb-4">
+        El modelo de transporte es un problema clásico de programación lineal. Su objetivo es encontrar un patrón de envíos que <strong>minimice el costo total de transporte</strong> desde varios orígenes (plantas, fábricas) hacia múltiples destinos (clientes, almacenes).
+      </p>
+      <ul class="list-disc list-inside text-slate-400 font-light space-y-2">
+        <li><strong>Oferta (Orígenes):</strong> Capacidad máxima o disponibilidad de unidades (a<sub>i</sub>).</li>
+        <li><strong>Demanda (Destinos):</strong> Requerimiento mínimo de unidades a satisfacer (b<sub>j</sub>).</li>
+        <li><strong>Costo Unitario (c<sub>ij</sub>):</strong> Valor de enviar una unidad desde el origen <em>i</em> al destino <em>j</em>.</li>
+      </ul>
+    </section>
+
+    <section class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+      <h2 class="text-2xl font-bold text-slate-100 mb-6 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-blue-400 rounded-full"></span>
+        Formulación Matemática
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+          <h3 class="text-slate-300 font-bold mb-2">1. Variables de Decisión</h3>
+          <p class="text-slate-400 text-sm font-light">
+            <code class="text-blue-300 bg-blue-900/20 px-1 rounded">x<sub>ij</sub></code> = Cantidad de unidades enviadas desde el origen <em>i</em> al destino <em>j</em>.
+          </p>
+        </div>
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+          <h3 class="text-slate-300 font-bold mb-2">2. Función Objetivo</h3>
+          <p class="text-slate-400 text-sm font-light">
+            Minimizar Z = Σ (c<sub>ij</sub> · x<sub>ij</sub>) <br>
+            <span class="text-xs text-slate-500">(Costo unitario × Cantidad enviada)</span>
+          </p>
+        </div>
+      </div>
+      
+      <div class="mt-6 bg-slate-950 p-5 rounded-xl border border-slate-800">
+        <h3 class="text-slate-300 font-bold mb-3">3. Restricciones</h3>
+        <div class="space-y-4">
+          <div>
+            <p class="text-sm font-medium text-blue-400 mb-1">Restricciones de Oferta (≤)</p>
+            <p class="text-slate-400 text-sm font-light">Lo que sale de un origen no puede superar su capacidad. <br>Ej: x<sub>11</sub> + x<sub>12</sub> + x<sub>13</sub> ≤ Oferta Planta 1</p>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-emerald-400 mb-1">Restricciones de Demanda (≥)</p>
+            <p class="text-slate-400 text-sm font-light">Lo que llega a un destino debe cubrir su necesidad. <br>Ej: x<sub>11</sub> + x<sub>21</sub> + x<sub>31</sub> ≥ Demanda Ciudad 1</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+      <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-blue-300 rounded-full"></span>
+        Caso Práctico: PowerCo
+      </h2>
+      <p class="text-slate-400 font-light mb-6">
+        PowerCo tiene 3 plantas que suministran energía a 4 ciudades. Se busca formular el problema de programación lineal para minimizar los costos de envío.
+      </p>
+      
+      <div class="overflow-x-auto bg-slate-950 rounded-xl border border-slate-800 p-4 mb-6">
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="text-xs uppercase bg-slate-900 text-slate-400 border-b border-slate-800">
+            <tr>
+              <th class="px-4 py-3">Planta \ Ciudad</th>
+              <th class="px-4 py-3 text-center">C1</th>
+              <th class="px-4 py-3 text-center">C2</th>
+              <th class="px-4 py-3 text-center">C3</th>
+              <th class="px-4 py-3 text-center">C4</th>
+              <th class="px-4 py-3 text-right text-blue-400">Oferta</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800 font-mono">
+            <tr><td class="px-4 py-3 font-bold">P1</td><td class="px-4 py-3 text-center">$8</td><td class="px-4 py-3 text-center">$6</td><td class="px-4 py-3 text-center">$10</td><td class="px-4 py-3 text-center">$9</td><td class="px-4 py-3 text-right text-blue-400">35</td></tr>
+            <tr><td class="px-4 py-3 font-bold">P2</td><td class="px-4 py-3 text-center">$9</td><td class="px-4 py-3 text-center">$12</td><td class="px-4 py-3 text-center">$13</td><td class="px-4 py-3 text-center">$7</td><td class="px-4 py-3 text-right text-blue-400">50</td></tr>
+            <tr><td class="px-4 py-3 font-bold">P3</td><td class="px-4 py-3 text-center">$14</td><td class="px-4 py-3 text-center">$9</td><td class="px-4 py-3 text-center">$16</td><td class="px-4 py-3 text-center">$5</td><td class="px-4 py-3 text-right text-blue-400">40</td></tr>
+            <tr class="bg-slate-900/50"><td class="px-4 py-3 font-bold text-emerald-400">Demanda</td><td class="px-4 py-3 text-center text-emerald-400">45</td><td class="px-4 py-3 text-center text-emerald-400">20</td><td class="px-4 py-3 text-center text-emerald-400">30</td><td class="px-4 py-3 text-center text-emerald-400">30</td><td class="px-4 py-3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="space-y-4 font-mono text-sm">
+        <div class="bg-slate-950 p-4 rounded-lg border border-slate-800">
+          <span class="text-blue-400 font-bold block mb-2">Función Objetivo:</span>
+          <span class="text-slate-300">Min Z = 8x<sub>11</sub> + 6x<sub>12</sub> + 10x<sub>13</sub> + 9x<sub>14</sub> + 9x<sub>21</sub> + 12x<sub>22</sub> + 13x<sub>23</sub> + 7x<sub>24</sub> + 14x<sub>31</sub> + 9x<sub>32</sub> + 16x<sub>33</sub> + 5x<sub>34</sub></span>
+        </div>
+      </div>
+    </section>
+    <section class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+      <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-blue-300 rounded-full"></span>
+        Caso Práctico: PowerCo
+      </h2>
+      <p class="text-slate-400 font-light mb-6">
+        PowerCo tiene 3 plantas que suministran energía a 4 ciudades. Simularemos la obtención de una solución básica inicial utilizando el Método de la Esquina Noroeste.
+      </p>
+      
+      <div class="mb-6">
+        <MatrizTransporteInteractiva />
+      </div>
+
+      <div class="space-y-4 font-mono text-sm">
+        <div class="bg-slate-950 p-4 rounded-lg border border-slate-800">
+          <span class="text-blue-400 font-bold block mb-2">Cálculo del Costo Total (Z) de esta asignación inicial:</span>
+          <span class="text-slate-300">Z = (35 × $8) + (10 × $9) + (20 × $12) + (20 × $13) + (10 × $16) + (30 × $5) = <strong class="text-white">$1,180</strong></span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>

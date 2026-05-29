@@ -1,17 +1,99 @@
 ---
+import Layout from '../layouts/Layout.astro';
 
+const modulos = [
+  {
+    numero: "01",
+    titulo: "Modelo de Transporte",
+    descripcion: "Estructuración de redes de distribución. Aprende a minimizar costos de envío mediante el modelado de variables, orígenes y destinos.",
+    link: "/transporte",
+    badge: "Programación Lineal",
+    colorAccent: "group-hover:border-l-blue-500 group-hover:bg-blue-500/5",
+    textAccent: "text-blue-400"
+  },
+  {
+    numero: "02",
+    titulo: "Problema de Asignación",
+    descripcion: "Mecánica iterativa del Método Húngaro. Fases de reducción por filas y columnas para asignación óptima de recursos a tareas.",
+    link: "/asignacion",
+    badge: "Algoritmos",
+    colorAccent: "group-hover:border-l-emerald-500 group-hover:bg-emerald-500/5",
+    textAccent: "text-emerald-400"
+  },
+  {
+    numero: "03",
+    titulo: "Árbol de Mínima Expansión",
+    descripcion: "Desarrollo de topologías de red eficientes. Algoritmo paso a paso para conectar nodos aislados evitando ciclos cerrados.",
+    link: "/arbol-expansion",
+    badge: "Redes",
+    colorAccent: "group-hover:border-l-amber-500 group-hover:bg-amber-500/5",
+    textAccent: "text-amber-400"
+  },
+  {
+    numero: "04",
+    titulo: "La Ruta Más Corta",
+    descripcion: "Optimización de trayectos mediante el algoritmo de Dijkstra y su traducción a restricciones de conservación de flujo.",
+    link: "/ruta-corta",
+    badge: "Redes y PL",
+    colorAccent: "group-hover:border-l-purple-500 group-hover:bg-purple-500/5",
+    textAccent: "text-purple-400"
+  }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Dashboard IO | Preparación">
+  <div class="space-y-12">
+    
+    <section class="mb-16">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
+        <span class="text-sm font-mono tracking-widest text-cyan-400 uppercase">Entorno de Estudio</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+        Investigación de Operaciones
+      </h1>
+      <p class="text-lg text-slate-400 max-w-2xl leading-relaxed font-light">
+        Material estructurado para dominar los modelos de optimización, desde la formulación matemática hasta la ejecución de algoritmos en redes.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      {modulos.map((mod) => (
+        <a 
+          href={mod.link} 
+          class={`group block relative p-6 md:p-8 bg-slate-900/30 border border-slate-800/60 rounded-xl backdrop-blur-sm transition-all duration-300 border-l-4 border-l-transparent ${mod.colorAccent}`}
+        >
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            
+            <div class="flex items-start gap-6">
+              <span class={`text-2xl md:text-3xl font-bold font-mono opacity-40 group-hover:opacity-100 transition-opacity ${mod.textAccent}`}>
+                {mod.numero}
+              </span>
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <h2 class="text-xl md:text-2xl font-semibold text-slate-100 group-hover:text-white transition-colors">
+                    {mod.titulo}
+                  </h2>
+                  <span class="hidden md:inline-block px-2.5 py-1 text-[10px] font-mono tracking-wider uppercase border border-slate-700 text-slate-400 rounded-full bg-slate-800/50">
+                    {mod.badge}
+                  </span>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed max-w-2xl font-light">
+                  {mod.descripcion}
+                </p>
+              </div>
+            </div>
+
+            <div class="shrink-0 flex items-center justify-end md:justify-center w-10 h-10 rounded-full bg-slate-800/50 group-hover:bg-slate-800 transition-colors border border-slate-700/50">
+              <svg class={`w-5 h-5 text-slate-400 group-hover:-rotate-45 transition-transform duration-300 ${mod.textAccent}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+
+          </div>
+        </a>
+      ))}
+    </section>
+
+  </div>
+</Layout>

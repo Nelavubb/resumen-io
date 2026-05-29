@@ -1,0 +1,211 @@
+---
+// src/components/MatrizHungaroInteractiva.astro
+---
+
+<div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col shadow-xl">
+  <div class="flex border-b border-slate-800 bg-slate-950/50 p-2 gap-2">
+    <button id="tab-regular" class="flex-1 py-2.5 px-4 text-sm font-medium rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 transition-all">
+      Caso Regular (Líneas = n)
+    </button>
+    <button id="tab-excepcional" class="flex-1 py-2.5 px-4 text-sm font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+      Caso Excepcional (Ajuste K)
+    </button>
+  </div>
+
+  <div class="p-6 flex flex-col items-center justify-center bg-slate-950/30">
+    <div class="grid grid-cols-4 gap-2 max-w-sm w-full font-mono text-center">
+      <div class="p-2 text-slate-600 text-xs font-bold"></div>
+      <div class="p-2 text-slate-400 text-xs font-bold border-b border-slate-800 pb-1">Tarea A</div>
+      <div class="p-2 text-slate-400 text-xs font-bold border-b border-slate-800 pb-1">Tarea B</div>
+      <div class="p-2 text-slate-400 text-xs font-bold border-b border-slate-800 pb-1">Tarea C</div>
+
+      <div class="p-3 text-slate-400 text-xs font-bold flex items-center justify-end pr-2 border-r border-slate-800">T1</div>
+      <div id="cell-0-0" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+      <div id="cell-0-1" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+      <div id="cell-0-2" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+
+      <div class="p-3 text-slate-400 text-xs font-bold flex items-center justify-end pr-2 border-r border-slate-800">T2</div>
+      <div id="cell-1-0" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+      <div id="cell-1-1" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+      <div id="cell-1-2" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+
+      <div class="p-3 text-slate-400 text-xs font-bold flex items-center justify-end pr-2 border-r border-slate-800">T3</div>
+      <div id="cell-2-0" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+      <div id="cell-2-1" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+      <div id="cell-2-2" class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300">0</div>
+    </div>
+  </div>
+
+  <div class="p-6 border-t border-slate-800 bg-slate-900 flex flex-col md:flex-row gap-6 items-center justify-between">
+    <div class="flex-1">
+      <h3 id="hungaro-step-title" class="text-emerald-400 font-bold mb-1 text-base">Paso</h3>
+      <p id="hungaro-step-desc" class="text-slate-300 font-light text-sm leading-relaxed min-h-[40px]">
+        Cargando descripción...
+      </p>
+    </div>
+    <div class="flex gap-3 shrink-0">
+      <button id="hungaro-prev" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm rounded-lg border border-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+        Anterior
+      </button>
+      <button id="hungaro-next" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm rounded-lg border border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+        Siguiente
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  interface HighlightData {
+    rows: number[];
+    cols: number[];
+    crossed: [number, number][];
+  }
+
+  interface StepHungaro {
+    title: string;
+    desc: string;
+    matrix: number[][];
+    highlights: HighlightData;
+  }
+
+  interface DatasetHungaro {
+    regular: StepHungaro[];
+    excepcional: StepHungaro[];
+  }
+
+  const dataset: DatasetHungaro = {
+    regular: [
+      {
+        title: "Matriz de Costos Inicial",
+        desc: "Tenemos costos base. Buscaremos el elemento más pequeño de cada fila para iniciar las reducciones.",
+        matrix: [[10, 15, 20], [5, 20, 15], [15, 10, 25]],
+        highlights: { rows: [], cols: [], crossed: [] }
+      },
+      {
+        title: "Paso 1: Reducción por Filas",
+        desc: "Restamos el mínimo de cada fila (F1:-10, F2:-5, F3:-10) a todos sus respectivos elementos.",
+        matrix: [[0, 5, 10], [0, 15, 10], [5, 0, 15]],
+        highlights: { rows: [0, 1, 2], cols: [], crossed: [] }
+      },
+      {
+        title: "Paso 2: Reducción por Columnas",
+        desc: "Usando la matriz anterior, buscamos el mínimo de cada columna (C1:0, C2:0, C3:10) y lo restamos.",
+        matrix: [[0, 5, 0], [0, 15, 0], [5, 0, 5]],
+        highlights: { rows: [], cols: [0, 1, 2], crossed: [] }
+      },
+      {
+        title: "Paso 3 y 4: Prueba de Óptimo (Líneas)",
+        desc: "Trazamos el mínimo de líneas para cubrir los ceros (Col A, Col C, Fila 3). Líneas = 3 (igual al tamaño n). ¡Solución óptima encontrada!",
+        matrix: [[0, 5, 0], [0, 15, 0], [5, 0, 5]],
+        highlights: { rows: [], cols: [], crossed: [[0,0], [0,2], [1,0], [1,2], [2,0], [2,1], [2,2]] }
+      }
+    ],
+    excepcional: [
+      {
+        title: "Matriz Inicial (Caso Excepcional)",
+        desc: "Cargamos una matriz diseñada para forzar un bloqueo donde las líneas trazadas inicialmente serán menores que n.",
+        matrix: [[10, 15, 20], [15, 20, 25], [25, 25, 25]],
+        highlights: { rows: [], cols: [], crossed: [] }
+      },
+      {
+        title: "Paso 1 y 2: Reducción Completada",
+        desc: "Tras restar los mínimos de filas y columnas, obtenemos esta matriz con ceros concentrados en zonas específicas.",
+        matrix: [[0, 5, 10], [0, 5, 10], [0, 0, 0]],
+        highlights: { rows: [], cols: [], crossed: [] }
+      },
+      {
+        title: "Paso 3 y 4: Bloqueo detectado (Líneas < n)",
+        desc: "Trazamos líneas para cubrir todos los ceros (Fila 3 y Columna A). Solo necesitamos 2 líneas. Como 2 < 3, pasamos al Paso 5.",
+        matrix: [[0, 5, 10], [0, 5, 10], [0, 0, 0]],
+        highlights: { rows: [], cols: [], crossed: [[0,0], [1,0], [2,0], [2,1], [2,2]] }
+      },
+      {
+        title: "Paso 5: Ajuste de Matriz (Constante k)",
+        desc: "El menor valor no cubierto es k = 5. Lo restamos a los libres, lo sumamos a la intersección (M[2][0] pasa de 0 a 5) y los demás siguen igual.",
+        matrix: [[0, 0, 5], [0, 0, 5], [5, 0, 0]],
+        highlights: { rows: [], cols: [], crossed: [] }
+      },
+      {
+        title: "Paso Final: Nueva Prueba de Óptimo",
+        desc: "Al intentar cubrir los nuevos ceros, ahora es obligatorio trazar 3 líneas (Fila 3, Col A y Col B). Líneas = 3. Problema resuelto con éxito.",
+        matrix: [[0, 0, 5], [0, 0, 5], [5, 0, 0]],
+        highlights: { rows: [], cols: [], crossed: [[0,0], [0,1], [1,0], [1,1], [2,0], [2,1], [2,2]] }
+      }
+    ]
+  };
+
+  let currentMode: 'regular' | 'excepcional' = 'regular';
+  let currentStep: number = 0;
+
+  const tabRegular = document.getElementById('tab-regular') as HTMLButtonElement | null;
+  const tabExcepcional = document.getElementById('tab-excepcional') as HTMLButtonElement | null;
+  const btnNext = document.getElementById('hungaro-next') as HTMLButtonElement | null;
+  const btnPrev = document.getElementById('hungaro-prev') as HTMLButtonElement | null;
+  const titleEl = document.getElementById('hungaro-step-title') as HTMLElement | null;
+  const descEl = document.getElementById('hungaro-step-desc') as HTMLElement | null;
+
+  function updateUI(): void {
+    const data = dataset[currentMode][currentStep];
+    
+    if (titleEl) titleEl.textContent = `${data.title}`;
+    if (descEl) descEl.textContent = data.desc;
+
+    for (let r = 0; r < 3; r++) {
+      for (let c = 0; c < 3; c++) {
+        const cell = document.getElementById(`cell-${r}-${c}`) as HTMLElement | null;
+        if (cell) {
+          cell.textContent = data.matrix[r][c].toString();
+          
+          cell.className = "p-4 bg-slate-900 border border-slate-800 rounded-xl text-lg text-white font-bold transition-all duration-300";
+          
+          if (data.highlights.rows.includes(r)) {
+            cell.classList.add('border-blue-500/40', 'bg-blue-950/20');
+          }
+          if (data.highlights.cols.includes(c)) {
+            cell.classList.add('border-amber-500/40', 'bg-amber-950/20');
+          }
+          
+          const isCrossed = data.highlights.crossed.some(([row, col]) => row === r && col === c);
+          if (isCrossed) {
+            cell.classList.add('border-emerald-500/50', 'bg-emerald-950/40', 'line-through', 'text-slate-500');
+          }
+        }
+      }
+    }
+
+    if (btnPrev) btnPrev.disabled = currentStep === 0;
+    if (btnNext) btnNext.disabled = currentStep === dataset[currentMode].length - 1;
+  }
+
+  tabRegular?.addEventListener('click', () => {
+    currentMode = 'regular';
+    currentStep = 0;
+    if (tabRegular) tabRegular.className = "flex-1 py-2.5 px-4 text-sm font-medium rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 transition-all";
+    if (tabExcepcional) tabExcepcional.className = "flex-1 py-2.5 px-4 text-sm font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all";
+    updateUI();
+  });
+
+  tabExcepcional?.addEventListener('click', () => {
+    currentMode = 'excepcional';
+    currentStep = 0;
+    if (tabExcepcional) tabExcepcional.className = "flex-1 py-2.5 px-4 text-sm font-medium rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 transition-all";
+    if (tabRegular) tabRegular.className = "flex-1 py-2.5 px-4 text-sm font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all";
+    updateUI();
+  });
+
+  btnNext?.addEventListener('click', () => {
+    if (currentStep < dataset[currentMode].length - 1) {
+      currentStep++;
+      updateUI();
+    }
+  });
+
+  btnPrev?.addEventListener('click', () => {
+    if (currentStep > 0) {
+      currentStep--;
+      updateUI();
+    }
+  });
+
+  updateUI();
+</script>

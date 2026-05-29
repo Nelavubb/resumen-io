@@ -1,43 +1,53 @@
-# Astro Starter Kit: Minimal
+# Guía Interactiva - Investigación de Operaciones
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Un entorno de estudio tipo "Dashboard" desarrollado para visualizar, repasar y comprender los algoritmos de redes y modelos de optimización (Programación Lineal) de la asignatura de Investigación de Operaciones. 
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+El proyecto destaca por sus **simuladores visuales interactivos** construidos de forma nativa, permitiendo ejecutar algoritmos matemáticos paso a paso sobre grafos y matrices sin recargar la página.
 
-## 🚀 Project Structure
+## Características Principales
 
-Inside of your Astro project, you'll see the following folders and files:
+El temario está dividido en 4 módulos interactivos:
+
+1. **Modelo de Transporte:** Formulación de PL y simulador visual del algoritmo de la **Esquina Noroeste** (agotamiento de oferta/demanda).
+2. **Problema de Asignación:** Simulador paso a paso del **Método Húngaro**, incluyendo visualización del trazado de líneas y el ajuste de la constante $k$ para casos excepcionales.
+3. **Árbol de Mínima Expansión:** Grafo SVG interactivo que muestra la conexión de nodos acíclicos iteración por iteración.
+4. **La Ruta Más Corta:** Resolución gráfica del algoritmo de **Dijkstra**, mostrando la transición de etiquetas temporales a permanentes y la actualización de distancias.
+
+## Stack Tecnológico
+
+Este proyecto fue diseñado priorizando el rendimiento y la escalabilidad, utilizando un enfoque *Zero-JS-Framework* (sin React, Vue o Svelte) para el cliente:
+
+- **Framework:** [Astro](https://astro.build/) (v6+)
+- **Estilos:** [Tailwind CSS](https://tailwindcss.com/) (v3.4)
+- **Tipado Estricto:** TypeScript
+- **Interactividad:** Vanilla JavaScript + SVG Nativo
+- **Diseño UI:** Estética Dark Tech / Dashboard Académico
+
+## Estructura del Proyecto
 
 ```text
 /
-├── public/
+├── public/                 # Assets estáticos (favicon, etc.)
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/         # Componentes aislados
+│   │   ├── Navbar.astro
+│   │   ├── GrafoDijkstraInteractivo.astro
+│   │   ├── GrafoInteractivo.astro
+│   │   ├── MatrizHungaroInteractiva.astro
+│   │   └── MatrizTransporteInteractiva.astro
+│   ├── layouts/            # Plantilla base (Fondo, fuentes, head)
+│   │   └── Layout.astro
+│   └── pages/              # Enrutamiento automático
+│       ├── index.astro
+│       ├── transporte.astro
+│       ├── asignacion.astro
+│       ├── arbol-expansion.astro
+│       └── ruta-corta.astro
+├── astro.config.mjs        # Configuración de integraciones
+├── tailwind.config.mjs     # Configuración de diseño JIT
+└── tsconfig.json           # Reglas estrictas de TypeScript
 ```
+👨‍💻 Autor
+Desarrollado por Nelson Avello
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+AveLogic Chile

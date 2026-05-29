@@ -1,0 +1,245 @@
+---
+---
+
+<div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col shadow-xl">
+  <div class="bg-slate-950/50 p-4 border-b border-slate-800 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="flex h-3 w-3 relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+      </span>
+      <span class="text-purple-400 font-mono text-sm font-bold uppercase tracking-wider">Simulador: Algoritmo de Dijkstra</span>
+    </div>
+    <div class="flex gap-4 text-xs font-mono text-slate-400">
+      <div class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-slate-800 border border-slate-600"></span> Temporal</div>
+      <div class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-purple-600 border border-purple-400"></span> Permanente</div>
+    </div>
+  </div>
+
+  <div class="relative w-full h-[450px] bg-slate-950 flex items-center justify-center p-4">
+    <svg viewBox="0 0 600 400" class="w-full h-full max-w-2xl overflow-visible">
+      <defs>
+        <marker id="arrow-default" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569" />
+        </marker>
+        <marker id="arrow-active" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#a855f7" /> 
+        </marker>
+      </defs>
+
+      <g id="edges" stroke="#334155" stroke-width="2" fill="none">
+        <line x1="100" y1="200" x2="250" y2="100" class="edge e1-2 transition-all duration-500" marker-end="url(#arrow-default)" />
+        <line x1="100" y1="200" x2="250" y2="300" class="edge e1-3 transition-all duration-500" marker-end="url(#arrow-default)" />
+        <line x1="250" y1="100" x2="250" y2="300" class="edge e2-3 transition-all duration-500" marker-end="url(#arrow-default)" />
+        <line x1="250" y1="300" x2="400" y2="200" class="edge e3-4 transition-all duration-500" marker-end="url(#arrow-default)" />
+        <line x1="400" y1="200" x2="250" y2="100" class="edge e4-2 transition-all duration-500" marker-end="url(#arrow-default)" />
+        <line x1="250" y1="300" x2="550" y2="200" class="edge e3-5 transition-all duration-500" marker-end="url(#arrow-default)" />
+        <line x1="400" y1="200" x2="550" y2="200" class="edge e4-5 transition-all duration-500" marker-end="url(#arrow-default)" />
+      </g>
+
+      <g fill="#94a3b8" font-size="12" font-family="monospace" font-weight="bold">
+        <text x="160" y="140" fill="#cbd5e1">100</text>
+        <text x="160" y="270" fill="#cbd5e1">30</text>
+        <text x="260" y="200" fill="#cbd5e1">20</text>
+        <text x="320" y="270" fill="#cbd5e1">10</text>
+        <text x="330" y="140" fill="#cbd5e1">15</text>
+        <text x="400" y="320" fill="#cbd5e1">60</text>
+        <text x="475" y="190" fill="#cbd5e1">50</text>
+      </g>
+
+      <g class="nodes" font-family="monospace" text-anchor="middle">
+        <g class="node n1 transition-all duration-500" transform="translate(100, 200)">
+          <rect class="lbl-bg transition-colors duration-300" x="-35" y="-45" width="70" height="22" rx="4" fill="#1e293b" stroke="#334155" />
+          <text class="lbl-txt transition-colors duration-300" x="0" y="-30" font-size="12" fill="#94a3b8" font-weight="bold">[∞, -]</text>
+          <circle r="18" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+          <text y="5" font-size="14" fill="#f8fafc" font-weight="bold">1</text>
+        </g>
+        <g class="node n2 transition-all duration-500" transform="translate(250, 100)">
+          <rect class="lbl-bg transition-colors duration-300" x="-35" y="-45" width="70" height="22" rx="4" fill="#1e293b" stroke="#334155" />
+          <text class="lbl-txt transition-colors duration-300" x="0" y="-30" font-size="12" fill="#94a3b8" font-weight="bold">[∞, -]</text>
+          <circle r="18" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+          <text y="5" font-size="14" fill="#f8fafc" font-weight="bold">2</text>
+        </g>
+        <g class="node n3 transition-all duration-500" transform="translate(250, 300)">
+          <rect class="lbl-bg transition-colors duration-300" x="-35" y="23" width="70" height="22" rx="4" fill="#1e293b" stroke="#334155" />
+          <text class="lbl-txt transition-colors duration-300" x="0" y="38" font-size="12" fill="#94a3b8" font-weight="bold">[∞, -]</text>
+          <circle r="18" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+          <text y="5" font-size="14" fill="#f8fafc" font-weight="bold">3</text>
+        </g>
+        <g class="node n4 transition-all duration-500" transform="translate(400, 200)">
+          <rect class="lbl-bg transition-colors duration-300" x="-35" y="-45" width="70" height="22" rx="4" fill="#1e293b" stroke="#334155" />
+          <text class="lbl-txt transition-colors duration-300" x="0" y="-30" font-size="12" fill="#94a3b8" font-weight="bold">[∞, -]</text>
+          <circle r="18" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+          <text y="5" font-size="14" fill="#f8fafc" font-weight="bold">4</text>
+        </g>
+        <g class="node n5 transition-all duration-500" transform="translate(550, 200)">
+          <rect class="lbl-bg transition-colors duration-300" x="-35" y="-45" width="70" height="22" rx="4" fill="#1e293b" stroke="#334155" />
+          <text class="lbl-txt transition-colors duration-300" x="0" y="-30" font-size="12" fill="#94a3b8" font-weight="bold">[∞, -]</text>
+          <circle r="18" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+          <text y="5" font-size="14" fill="#f8fafc" font-weight="bold">5</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="p-6 bg-slate-900 border-t border-slate-800 flex flex-col md:flex-row gap-6 items-center justify-between">
+    <div class="flex-1">
+      <h3 id="djk-title" class="text-purple-400 font-bold mb-2">Paso 0: Inicialización</h3>
+      <p id="djk-desc" class="text-slate-300 font-light text-sm min-h-[40px]">
+        Configuramos el nodo de origen (1) con una etiqueta permanente de distancia 0. Todos los demás nodos inician con distancia infinita [∞, -].
+      </p>
+    </div>
+    <div class="flex gap-3 shrink-0">
+      <button id="djk-prev" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors border border-slate-700 disabled:opacity-50 disabled:cursor-not-allowed">
+        Anterior
+      </button>
+      <button id="djk-next" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-lg transition-colors border border-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.3)] disabled:opacity-50 disabled:cursor-not-allowed">
+        Siguiente
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  interface StepDijkstra {
+    title: string;
+    desc: string;
+    lbls: Record<string, string>;
+    perms: string[];
+    activeEdges: string[];
+    finalPath: string[];
+  }
+
+  const steps: StepDijkstra[] = [
+    {
+      title: "Paso 0: Inicialización",
+      desc: "Nodo 1 es el origen. Le asignamos la etiqueta permanente [0, -]. Los demás quedan como temporales con infinito.",
+      lbls: { n1: "[0, -]", n2: "[∞, -]", n3: "[∞, -]", n4: "[∞, -]", n5: "[∞, -]" },
+      perms: ["n1"], activeEdges: [], finalPath: []
+    },
+    {
+      title: "Paso 1: Evaluar desde Nodo 1",
+      desc: "Evaluamos las conexiones que salen de 1. Nodo 2 se actualiza a [100, 1]. Nodo 3 se actualiza a [30, 1].",
+      lbls: { n1: "[0, -]", n2: "[100, 1]", n3: "[30, 1]", n4: "[∞, -]", n5: "[∞, -]" },
+      perms: ["n1"], activeEdges: [".e1-2", ".e1-3"], finalPath: []
+    },
+    {
+      title: "Paso 2: Fijar Permanente (Nodo 3)",
+      desc: "De los temporales [100, 1] y [30, 1], el menor es 30. Convertimos el Nodo 3 en Permanente.",
+      lbls: { n1: "[0, -]", n2: "[100, 1]", n3: "[30, 1]", n4: "[∞, -]", n5: "[∞, -]" },
+      perms: ["n1", "n3"], activeEdges: [], finalPath: []
+    },
+    {
+      title: "Paso 3: Evaluar desde Nodo 3",
+      desc: "Desde el Nodo 3 evaluamos salidas. Nodo 4: 30 + 10 = 40. Etiqueta [40, 3]. Nodo 5: 30 + 60 = 90. Etiqueta [90, 3].",
+      lbls: { n1: "[0, -]", n2: "[100, 1]", n3: "[30, 1]", n4: "[40, 3]", n5: "[90, 3]" },
+      perms: ["n1", "n3"], activeEdges: [".e3-4", ".e3-5"], finalPath: []
+    },
+    {
+      title: "Paso 4: Fijar Permanente (Nodo 4)",
+      desc: "Comparamos los temporales actuales: Nodo 2 (100), Nodo 4 (40), Nodo 5 (90). El menor es 40. Hacemos el Nodo 4 Permanente.",
+      lbls: { n1: "[0, -]", n2: "[100, 1]", n3: "[30, 1]", n4: "[40, 3]", n5: "[90, 3]" },
+      perms: ["n1", "n3", "n4"], activeEdges: [], finalPath: []
+    },
+    {
+      title: "Paso 5: Evaluar desde Nodo 4",
+      desc: "¡Atención! Desde el Nodo 4 evaluamos la salida al Nodo 2. Costo 40 + 15 = 55. Como 55 < 100, ACTUALIZAMOS el Nodo 2 a [55, 4]. Evaluamos al Nodo 5: 40 + 50 = 90 (Empate, mantenemos).",
+      lbls: { n1: "[0, -]", n2: "[55, 4]", n3: "[30, 1]", n4: "[40, 3]", n5: "[90, 3]" },
+      perms: ["n1", "n3", "n4"], activeEdges: [".e4-2", ".e4-5"], finalPath: []
+    },
+    {
+      title: "Paso 6: Fijar Permanente (Nodo 2)",
+      desc: "De los temporales que quedan: Nodo 2 (55) y Nodo 5 (90). El menor es 55. Hacemos el Nodo 2 Permanente.",
+      lbls: { n1: "[0, -]", n2: "[55, 4]", n3: "[30, 1]", n4: "[40, 3]", n5: "[90, 3]" },
+      perms: ["n1", "n3", "n4", "n2"], activeEdges: [], finalPath: []
+    },
+    {
+      title: "Paso 7: Evaluar desde Nodo 2",
+      desc: "El Nodo 2 solo tiene salida hacia el Nodo 3, pero el Nodo 3 ya es permanente, así que no se evalúa. Queda fijar el último.",
+      lbls: { n1: "[0, -]", n2: "[55, 4]", n3: "[30, 1]", n4: "[40, 3]", n5: "[90, 3]" },
+      perms: ["n1", "n3", "n4", "n2"], activeEdges: [".e2-3"], finalPath: []
+    },
+    {
+      title: "Paso 8: Destino Alcanzado",
+      desc: "Convertimos el Nodo 5 (Destino) en Permanente. Terminamos las iteraciones. Costo mínimo total para llegar = 90.",
+      lbls: { n1: "[0, -]", n2: "[55, 4]", n3: "[30, 1]", n4: "[40, 3]", n5: "[90, 3]" },
+      perms: ["n1", "n3", "n4", "n2", "n5"], activeEdges: [], finalPath: []
+    },
+    {
+      title: "Paso Final: Trazar la Ruta Óptima",
+      desc: "Rastreamos de reversa: El 5 viene del 3. El 3 viene del 1. (Existe un empate técnico enviando por 1->3->4->5, ambas cuestan 90). ¡Ruta encontrada!",
+      lbls: { n1: "[0, -]", n2: "[55, 4]", n3: "[30, 1]", n4: "[40, 3]", n5: "[90, 3]" },
+      perms: ["n1", "n3", "n4", "n2", "n5"], activeEdges: [], finalPath: [".e1-3", ".e3-5"]
+    }
+  ];
+
+  let stepIdx: number = 0;
+
+  const btnNext = document.getElementById('djk-next') as HTMLButtonElement | null;
+  const btnPrev = document.getElementById('djk-prev') as HTMLButtonElement | null;
+  const titleEl = document.getElementById('djk-title') as HTMLElement | null;
+  const descEl = document.getElementById('djk-desc') as HTMLElement | null;
+
+  function renderStep(): void {
+    const data = steps[stepIdx];
+    
+    if (titleEl) titleEl.textContent = data.title;
+    if (descEl) descEl.textContent = data.desc;
+
+    Object.keys(data.lbls).forEach(nodeClass => {
+      const nodeGroup = document.querySelector(`.${nodeClass}`) as SVGElement | null;
+      if (!nodeGroup) return;
+      
+      const txt = nodeGroup.querySelector('.lbl-txt') as SVGTextElement | null;
+      const bg = nodeGroup.querySelector('.lbl-bg') as SVGRectElement | null;
+      const circle = nodeGroup.querySelector('circle') as SVGCircleElement | null;
+      
+      if (txt) txt.textContent = data.lbls[nodeClass];
+      
+      if (data.perms.includes(nodeClass)) {
+        bg?.setAttribute('fill', '#7e22ce');
+        bg?.setAttribute('stroke', '#a855f7');
+        txt?.setAttribute('fill', '#ffffff');
+        circle?.setAttribute('stroke', '#a855f7');
+      } else {
+        bg?.setAttribute('fill', '#1e293b');
+        bg?.setAttribute('stroke', '#334155');
+        txt?.setAttribute('fill', '#94a3b8');
+        circle?.setAttribute('stroke', '#475569');
+      }
+    });
+
+    document.querySelectorAll('.edge').forEach(e => {
+      const edge = e as SVGLineElement;
+      edge.setAttribute('stroke', '#334155');
+      edge.setAttribute('stroke-width', '2');
+      edge.setAttribute('marker-end', 'url(#arrow-default)');
+    });
+
+    data.activeEdges.forEach(selector => {
+      const edge = document.querySelector(selector) as SVGLineElement | null;
+      if (edge) {
+        edge.setAttribute('stroke', '#a855f7');
+        edge.setAttribute('stroke-width', '3');
+        edge.setAttribute('marker-end', 'url(#arrow-active)');
+      }
+    });
+
+    data.finalPath.forEach(selector => {
+      const edge = document.querySelector(selector) as SVGLineElement | null;
+      if (edge) {
+        edge.setAttribute('stroke', '#a855f7');
+        edge.setAttribute('stroke-width', '5');
+        edge.setAttribute('marker-end', 'url(#arrow-active)');
+      }
+    });
+
+    if (btnPrev) btnPrev.disabled = stepIdx === 0;
+    if (btnNext) btnNext.disabled = stepIdx === steps.length - 1;
+  }
+
+  btnNext?.addEventListener('click', () => { if (stepIdx < steps.length - 1) { stepIdx++; renderStep(); } });
+  btnPrev?.addEventListener('click', () => { if (stepIdx > 0) { stepIdx--; renderStep(); } });
+
+  renderStep();
+</script>

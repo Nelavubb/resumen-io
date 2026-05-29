@@ -1,0 +1,213 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GrafoDijkstraInteractivo from "../components/GrafoDijkstraInteractivo.astro";
+---
+
+<Layout title="La Ruta Más Corta | IO">
+  <div class="space-y-12">
+    <header class="border-b border-slate-800 pb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <a
+          href="/"
+          class="text-slate-500 hover:text-cyan-400 transition-colors flex items-center gap-1 text-sm font-medium"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"></path></svg
+          >
+          Volver al Dashboard
+        </a>
+      </div>
+      <div class="flex items-center gap-4">
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-xl font-bold"
+        >
+          04
+        </div>
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+            La Ruta Más Corta
+          </h1>
+          <p class="text-purple-400 font-mono text-sm mt-1">
+            Algoritmo de Dijkstra y Modelado PL
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <section
+      class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm"
+    >
+      <h2
+        class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2"
+      >
+        <span class="w-1.5 h-6 bg-purple-500 rounded-full"></span>
+        Teoría y Etiquetas
+      </h2>
+      <p class="text-slate-400 font-light leading-relaxed mb-4">
+        El algoritmo de Dijkstra determina la ruta de menor distancia o costo
+        entre un nodo origen específico y los demás puntos de la red. Opera
+        mediante un sistema estructurado de <strong>etiquetas de nodo</strong> que
+        pueden ser de dos tipos:
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+          <span
+            class="text-amber-400 font-mono text-xs uppercase font-bold block mb-1"
+            >Etiquetas Temporales</span
+          >
+          <p class="text-sm text-slate-400 font-light">
+            Se modifican continuamente si se llega a descubrir una ruta con una
+            distancia acumulada menor hacia ese nodo.
+          </p>
+        </div>
+        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+          <span
+            class="text-purple-400 font-mono text-xs uppercase font-bold block mb-1"
+            >Etiquetas Permanentes</span
+          >
+          <p class="text-sm text-slate-400 font-light">
+            Se fijan una vez que se determina matemáticamente que no existe un
+            camino más corto desde el origen.
+          </p>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 font-mono mt-4">
+        Estructura formal de la etiqueta: [u<sub>j</sub>, i] = [distancia
+        acumulada, nodo predecesor].
+      </p>
+    </section>
+
+    <section
+      class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm"
+    >
+      <h2
+        class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2"
+      >
+        <span class="w-1.5 h-6 bg-purple-400 rounded-full"></span>
+        Formulación Matemática (PL)
+      </h2>
+      <p class="text-slate-400 font-light leading-relaxed mb-6">
+        Para modelar la ruta más corta como programación lineal, se asume que
+        ingresa exactamente <strong>1 unidad de flujo</strong> en el nodo de origen
+        y debe salir en el nodo de destino final.
+      </p>
+
+      <div class="space-y-4">
+        <div
+          class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-sm"
+        >
+          <span class="text-purple-400 font-bold block mb-1"
+            >Variables de Decisión Binarias:</span
+          >
+          <p class="text-slate-400">
+            x<sub>ij</sub> = 1 si se selecciona y usa el arco que va de <em
+              >i</em
+            > a <em>j</em>.
+          </p>
+          <p class="text-slate-400">
+            x<sub>ij</sub> = 0 si el arco no se incluye en la ruta.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <span class="text-purple-400 font-mono text-sm font-bold block mb-2"
+            >Restricciones de Conservación de Flujo</span
+          >
+          <div
+            class="grid md:grid-cols-3 gap-4 font-mono text-xs md:text-sm text-slate-400"
+          >
+            <div class="p-3 bg-slate-900/50 rounded-lg">
+              <p class="text-white font-bold mb-1">Nodo Origen</p>
+              <p>Flujo de Salida = 1 <br />(Ecuación = 1)</p>
+            </div>
+            <div class="p-3 bg-slate-900/50 rounded-lg">
+              <p class="text-white font-bold mb-1">Nodos Intermedios</p>
+              <p>Entrada - Salida = 0 <br />(Ecuación = 0)</p>
+            </div>
+            <div class="p-3 bg-slate-900/50 rounded-lg">
+              <p class="text-white font-bold mb-1">Nodo Destino</p>
+              <p>Flujo de Entrada = 1 <br />(Ecuación = 1)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm"
+    >
+      <h2
+        class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2"
+      >
+        <span class="w-1.5 h-6 bg-purple-300 rounded-full"></span>
+        Caso Práctico Resuelto: Red de 5 Nodos
+      </h2>
+      <p class="text-slate-400 font-light mb-6">
+        Vamos a resolver paso a paso el problema de transbordo desde el Nodo 1
+        al Nodo 5 utilizando el algoritmo de Dijkstra. Presta atención a cómo
+        las etiquetas pasan de ser temporales (grises) a permanentes (púrpura):
+      </p>
+
+      <div class="mb-10">
+        <GrafoDijkstraInteractivo />
+      </div>
+
+      <h3
+        class="text-lg font-bold text-slate-200 mb-3 border-t border-slate-800 pt-6"
+      >
+        La formulación PL equivalente sería:
+      </h3>
+      <div class="space-y-4 font-mono text-sm">
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <span class="text-purple-400 font-bold block mb-1"
+            >Función Objetivo (Minimizar Distancia):</span
+          >
+          <p class="text-slate-300">
+            min Z = 100x<sub>12</sub> + 30x<sub>13</sub> + 20x<sub>23</sub> + 10x<sub
+              >34</sub
+            > + 15x<sub>42</sub> + 50x<sub>45</sub> + 60x<sub>35</sub>
+          </p>
+        </div>
+
+        <div
+          class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2"
+        >
+          <span class="text-purple-400 font-bold block mb-1"
+            >Sujeto a Restricciones de Balance:</span
+          >
+          <p class="text-slate-300">
+            <span class="text-slate-500">Nodo 1 (Origen):</span> x<sub>12</sub> +
+            x<sub>13</sub> = 1
+          </p>
+          <p class="text-slate-300">
+            <span class="text-slate-500">Nodo 2 (Transbordo):</span> x<sub
+              >12</sub
+            > + x<sub>42</sub> - x<sub>23</sub> = 0
+          </p>
+          <p class="text-slate-300">
+            <span class="text-slate-500">Nodo 3 (Transbordo):</span> x<sub
+              >13</sub
+            > + x<sub>23</sub> - x<sub>34</sub> - x<sub>35</sub> = 0
+          </p>
+          <p class="text-slate-300">
+            <span class="text-slate-500">Nodo 4 (Transbordo):</span> x<sub
+              >34</sub
+            > - x<sub>42</sub> - x<sub>45</sub> = 0
+          </p>
+          <p class="text-slate-300">
+            <span class="text-slate-500">Nodo 5 (Destino):</span> x<sub>35</sub> +
+            x<sub>45</sub> = 1
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,150 @@
+---
+---
+
+<div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col interactive-graph-container shadow-xl">
+  
+  <div class="relative w-full h-[400px] bg-slate-950 flex items-center justify-center p-4">
+    <svg viewBox="0 0 500 400" class="w-full h-full max-w-lg overflow-visible">
+      
+      <g id="edges" stroke="#334155" stroke-width="2" fill="none">
+        <line x1="250" y1="60" x2="120" y2="100" class="edge e1-2 transition-colors duration-500" />
+        <line x1="250" y1="60" x2="80" y2="200" class="edge e1-3 transition-colors duration-500" />
+        <line x1="250" y1="60" x2="150" y2="320" class="edge e1-4 transition-colors duration-500" />
+        <line x1="250" y1="60" x2="250" y2="200" class="edge e1-5 transition-colors duration-500" />
+        <line x1="250" y1="60" x2="420" y2="250" class="edge e1-8 transition-colors duration-500" />
+        <line x1="250" y1="60" x2="400" y2="130" class="edge e1-9 transition-colors duration-500" />
+        <line x1="120" y1="100" x2="80" y2="200" class="edge e2-3 transition-colors duration-500" />
+        <line x1="80" y1="200" x2="150" y2="320" class="edge e3-4 transition-colors duration-500" />
+        <line x1="80" y1="200" x2="250" y2="200" class="edge e3-5 transition-colors duration-500" />
+        <line x1="150" y1="320" x2="250" y2="200" class="edge e4-5 transition-colors duration-500" />
+        <line x1="150" y1="320" x2="200" y2="360" class="edge e4-6 transition-colors duration-500" />
+        <line x1="150" y1="320" x2="330" y2="300" class="edge e4-7 transition-colors duration-500" />
+        <line x1="250" y1="200" x2="200" y2="360" class="edge e5-6 transition-colors duration-500" />
+        <line x1="250" y1="200" x2="330" y2="300" class="edge e5-7 transition-colors duration-500" />
+        <line x1="250" y1="200" x2="420" y2="250" class="edge e5-8 transition-colors duration-500" />
+        <line x1="250" y1="200" x2="400" y2="130" class="edge e5-9 transition-colors duration-500" />
+        <line x1="200" y1="360" x2="330" y2="300" class="edge e6-7 transition-colors duration-500" />
+        <line x1="330" y1="300" x2="420" y2="250" class="edge e7-8 transition-colors duration-500" />
+        <line x1="420" y1="250" x2="400" y2="130" class="edge e8-9 transition-colors duration-500" />
+      </g>
+
+      <g fill="#94a3b8" font-size="12" font-family="monospace" font-weight="bold">
+        <text x="180" y="70">5</text> <text x="255" y="130">4</text> <text x="330" y="85">15</text> <text x="215" y="290">3</text> <text x="260" y="340">3</text> <text x="290" y="240">5</text> <text x="320" y="150">6</text> <text x="420" y="190">5</text> <text x="165" y="355">7</text> <text x="90" y="150">6</text> </g>
+
+      <g id="nodes" class="text-sm font-bold" text-anchor="middle" dominant-baseline="central">
+        <g class="node n1 transition-all duration-500" transform="translate(250, 60)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">1</text></g>
+        <g class="node n2 transition-all duration-500" transform="translate(120, 100)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">2</text></g>
+        <g class="node n3 transition-all duration-500" transform="translate(80, 200)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">3</text></g>
+        <g class="node n4 transition-all duration-500" transform="translate(150, 320)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">4</text></g>
+        <g class="node n5 transition-all duration-500" transform="translate(250, 200)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">5</text></g>
+        <g class="node n6 transition-all duration-500" transform="translate(200, 360)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">6</text></g>
+        <g class="node n7 transition-all duration-500" transform="translate(330, 300)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">7</text></g>
+        <g class="node n8 transition-all duration-500" transform="translate(420, 250)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">8</text></g>
+        <g class="node n9 transition-all duration-500" transform="translate(400, 130)"><circle r="16" fill="#1e293b" stroke="#475569" stroke-width="2"/><text fill="#f8fafc">9</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="p-6 bg-slate-900 border-t border-slate-800 flex flex-col md:flex-row gap-6 items-center justify-between">
+    <div class="flex-1">
+      <h3 id="step-title" class="text-amber-400 font-bold mb-2">Paso 0: Inicio</h3>
+      <p id="step-desc" class="text-slate-300 font-light text-sm">
+        Establecemos el nodo 1 como punto de partida. Aún no hay conexiones.
+      </p>
+    </div>
+    <div class="flex gap-3 shrink-0">
+      <button id="btn-prev" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors border border-slate-700 disabled:opacity-50 disabled:cursor-not-allowed">
+        Anterior
+      </button>
+      <button id="btn-next" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg transition-colors border border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.2)] disabled:opacity-50 disabled:cursor-not-allowed">
+        Siguiente
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const steps = [
+    { nodes: ['.n1'], edges: [], title: "Paso 0: Inicio", desc: "El algoritmo inicia en el Nodo 1. Conjunto conectado C = {1}. Conjunto no conectado = {2,3,4,5,6,7,8,9}." },
+    { nodes: ['.n1', '.n5'], edges: ['.e1-5'], title: "Iteración 1", desc: "Se evalúan todos los arcos desde el Nodo 1. El menor es 1 -> 5 con longitud 4." },
+    { nodes: ['.n1', '.n5', '.n6'], edges: ['.e1-5', '.e5-6'], title: "Iteración 2", desc: "Desde {1,5}, evaluamos salidas. La ruta más corta a un nodo no conectado es 5 -> 6 con longitud 3." },
+    { nodes: ['.n1', '.n5', '.n6', '.n7'], edges: ['.e1-5', '.e5-6', '.e6-7'], title: "Iteración 3", desc: "Desde {1,5,6}, el arco más corto disponible es 6 -> 7 con longitud 3." },
+    { nodes: ['.n1', '.n5', '.n6', '.n7', '.n2'], edges: ['.e1-5', '.e5-6', '.e6-7', '.e1-2'], title: "Iteración 4", desc: "El siguiente arco mínimo hacia un nodo aislado es 1 -> 2 con longitud 5." },
+    { nodes: ['.n1', '.n5', '.n6', '.n7', '.n2', '.n9'], edges: ['.e1-5', '.e5-6', '.e6-7', '.e1-2', '.e5-9'], title: "Iteración 5", desc: "Conectamos el nodo 9 a la red mediante el arco 5 -> 9 (longitud 6)." },
+    { nodes: ['.n1', '.n5', '.n6', '.n7', '.n2', '.n9', '.n3'], edges: ['.e1-5', '.e5-6', '.e6-7', '.e1-2', '.e5-9', '.e2-3'], title: "Iteración 6", desc: "Conectamos el nodo 3 a través del arco 2 -> 3 (longitud 6)." },
+    { nodes: ['.n1', '.n5', '.n6', '.n7', '.n2', '.n9', '.n3', '.n8'], edges: ['.e1-5', '.e5-6', '.e6-7', '.e1-2', '.e5-9', '.e2-3', '.e8-9'], title: "Iteración 7", desc: "Desde el nodo 9 recién agregado, detectamos la ruta 9 -> 8 (longitud 5)." },
+    { nodes: ['.n1', '.n5', '.n6', '.n7', '.n2', '.n9', '.n3', '.n8', '.n4'], edges: ['.e1-5', '.e5-6', '.e6-7', '.e1-2', '.e5-9', '.e2-3', '.e8-9', '.e4-6'], title: "Iteración 8 (Final)", desc: "Finalmente, conectamos el último nodo aislado (4) mediante el arco 6 -> 4 (longitud 7). ¡Árbol completado con longitud total 39!" }
+  ];
+
+  let currentStep = 0;
+
+  const btnNext = document.getElementById('btn-next') as HTMLButtonElement;
+  const btnPrev = document.getElementById('btn-prev') as HTMLButtonElement;
+  const titleEl = document.getElementById('step-title');
+  const descEl = document.getElementById('step-desc');
+
+  function renderStep(stepIndex: number) {
+    const stepData = steps[stepIndex];
+    
+    // Actualizar textos
+    if(titleEl) titleEl.textContent = stepData.title;
+    if(descEl) descEl.textContent = stepData.desc;
+
+    // Resetear todos los nodos
+    document.querySelectorAll('.node circle').forEach(el => {
+      el.setAttribute('fill', '#1e293b');
+      el.setAttribute('stroke', '#475569');
+    });
+    // Resetear todos los arcos
+    document.querySelectorAll('.edge').forEach(el => {
+      el.setAttribute('stroke', '#334155');
+      el.setAttribute('stroke-width', '2');
+    });
+
+    // Activar nodos del paso actual
+    stepData.nodes.forEach(selector => {
+      const node = document.querySelector(`${selector} circle`);
+      if (node) {
+        node.setAttribute('fill', '#f59e0b'); // amber-500
+        node.setAttribute('stroke', '#fbbf24'); // amber-400
+      }
+    });
+
+    // Activar arcos del paso actual
+    stepData.edges.forEach(selector => {
+      const edge = document.querySelector(selector);
+      if (edge) {
+        edge.setAttribute('stroke', '#f59e0b'); // amber-500
+        edge.setAttribute('stroke-width', '4');
+      }
+    });
+
+    // Estado de botones
+    if(btnPrev) btnPrev.disabled = currentStep === 0;
+    if(btnNext) btnNext.disabled = currentStep === steps.length - 1;
+  }
+
+  // Event Listeners
+  if(btnNext) btnNext.addEventListener('click', () => {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      renderStep(currentStep);
+    }
+  });
+
+  if(btnPrev) btnPrev.addEventListener('click', () => {
+    if (currentStep > 0) {
+      currentStep--;
+      renderStep(currentStep);
+    }
+  });
+
+  // Inicializar
+  renderStep(0);
+</script>
+
+<style>
+  /* Clases extra para suavizar las transiciones de SVG que no soporta Tailwind nativo tan fácil */
+  .node circle { transition: all 0.4s ease-in-out; }
+  .edge { transition: all 0.4s ease-in-out; }
+</style>

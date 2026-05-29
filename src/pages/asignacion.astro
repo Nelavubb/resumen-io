@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MatrizHungaroInteractiva from '../components/MatrizHungaroInteractiva.astro';
+---
+
+<Layout title="Asignación y Húngaro | IO">
+  <div class="space-y-12">
+    
+    <header class="border-b border-slate-800 pb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <a href="/" class="text-slate-500 hover:text-cyan-400 transition-colors flex items-center gap-1 text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          Volver al Dashboard
+        </a>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl font-bold">
+          02
+        </div>
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Problema de Asignación</h1>
+          <p class="text-emerald-400 font-mono text-sm mt-1">Algoritmo del Método Húngaro</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+      <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-emerald-500 rounded-full"></span>
+        Concepto Base
+      </h2>
+      <p class="text-slate-400 font-light leading-relaxed">
+        El modelo de asignación es un caso especial del modelo de transporte donde los orígenes (ej. trabajadores) se asignan a los destinos (ej. tareas) en una relación estricta de <strong>uno a uno</strong> (oferta = 1, demanda = 1). La herramienta matemática por excelencia para resolverlo a mano es el <strong>Método Húngaro</strong>.
+      </p>
+    </section>
+
+    <section class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+      <h2 class="text-2xl font-bold text-slate-100 mb-6 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-emerald-400 rounded-full"></span>
+        Las 5 Fases del Método Húngaro
+      </h2>
+      
+      <div class="space-y-4 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-800 before:to-transparent">
+        
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-slate-900 text-slate-400 group-hover:text-emerald-400 group-hover:border-emerald-500/50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition-colors z-10 font-bold">1</div>
+          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-950 p-4 rounded-xl border border-slate-800">
+            <h3 class="font-bold text-slate-200 mb-1">Reducción por Filas</h3>
+            <p class="text-sm text-slate-400 font-light">Encuentra el elemento más pequeño en cada fila y réstalo a todos los elementos de esa misma fila.</p>
+          </div>
+        </div>
+
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-slate-900 text-slate-400 group-hover:text-emerald-400 group-hover:border-emerald-500/50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition-colors z-10 font-bold">2</div>
+          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-950 p-4 rounded-xl border border-slate-800">
+            <h3 class="font-bold text-slate-200 mb-1">Reducción por Columnas</h3>
+            <p class="text-sm text-slate-400 font-light">Usando la nueva matriz, encuentra el costo mínimo de cada columna y réstalo a toda su columna.</p>
+          </div>
+        </div>
+
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-slate-900 text-slate-400 group-hover:text-emerald-400 group-hover:border-emerald-500/50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition-colors z-10 font-bold">3/4</div>
+          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-950 p-4 rounded-xl border border-slate-800">
+            <h3 class="font-bold text-slate-200 mb-1">Prueba de Optimalidad (Líneas)</h3>
+            <p class="text-sm text-slate-400 font-light">Traza el número mínimo de líneas (H/V) para cubrir todos los ceros. Si Nº de líneas = Nº de filas, <strong>¡Terminaste!</strong> Si es menor, ve al paso 5.</p>
+          </div>
+        </div>
+
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-slate-900 text-slate-400 group-hover:text-emerald-400 group-hover:border-emerald-500/50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition-colors z-10 font-bold">5</div>
+          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-950 p-4 rounded-xl border border-slate-800">
+            <h3 class="font-bold text-slate-200 mb-1">El Ajuste (Constante <em>k</em>)</h3>
+            <p class="text-sm text-slate-400 font-light">Busca el menor número <strong>no cubierto</strong>. Réstalo a los no cubiertos, súmalo a las intersecciones de líneas. Repite desde el Paso 3.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+      <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-emerald-300 rounded-full"></span>
+        Variantes Comunes
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-950 p-5 rounded-xl border border-amber-500/20">
+          <h3 class="text-amber-400 font-bold mb-2 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            Problemas Desbalanceados
+          </h3>
+          <p class="text-slate-400 text-sm font-light">
+            Si la matriz no es cuadrada (ej. 3 trabajadores, 4 tareas), el método fallará. <strong>Solución:</strong> Añade una fila o columna ficticia con costos de asignación iguales a cero.
+          </p>
+        </div>
+        <div class="bg-slate-950 p-5 rounded-xl border border-purple-500/20">
+          <h3 class="text-purple-400 font-bold mb-2 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            Problemas de Maximización
+          </h3>
+          <p class="text-slate-400 text-sm font-light">
+            Si los datos son ganancias en lugar de costos, debes convertirlo a un problema de minimización. <strong>Solución:</strong> Multiplica toda la matriz de ganancias por menos uno (-1) antes de empezar.
+          </p>
+        </div>
+      </div>
+    </section>
+    </section>
+
+    <section class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+      <h2 class="text-2xl font-bold text-slate-100 mb-2 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-emerald-400 rounded-full"></span>
+        Simulador de Matrices Paso a Paso
+      </h2>
+      <p class="text-slate-400 font-light mb-6 text-sm">
+        Interactúa con las dos ramas de ejecución del algoritmo. Observa cómo cambian las celdas y cómo se tachan los ceros según el estado matemático del proceso.
+      </p>
+      
+      <MatrizHungaroInteractiva />
+    </section>
+
+  </div>
+</Layout>

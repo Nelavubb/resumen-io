@@ -1,0 +1,27 @@
+---
+const navItems = [
+  { name: 'Inicio', href: '/' },
+  { name: 'Transporte', href: '/transporte' },
+  { name: 'Asignación', href: '/asignacion' },
+  { name: 'Redes', href: '/arbol-expansion' },
+  { name: 'Ruta Corta', href: '/ruta-corta' }
+];
+---
+
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+  <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 text-xl font-extrabold tracking-tighter text-white hover:opacity-80 transition-opacity">
+      Inv<span class="text-cyan-400">Operaciones</span>
+    </a>
+    <nav class="hidden md:flex space-x-6 items-center font-medium text-slate-300 text-sm">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="hover:text-cyan-400 transition-colors"
+        >
+          {item.name}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
